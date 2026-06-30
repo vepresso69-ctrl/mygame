@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GiftsBattle Analogue</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 130vh;
+        }
+
+        /* Твой кастомный фон сетки */
+        .background-grid {
+            position: fixed;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-image: url('7a2685d318dd789773c2cac38696e8cb.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: translateY(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Приветствие сверху как в GiftsBattle */
+        .user-badge {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .balance-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 35px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .balance-title {
+            font-size: 12px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .balance-value {
+            font-size: 48px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Сетчатая структура прозрачных кнопок */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 390px;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            padding: 16px 5px;
+            border-radius: 18px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0.95);
+        }
+
+        /* Секция инвентаря под GiftsBattle */
+        .inventory-section {
+            width: 100%;
+            max-width: 390px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 26px;
+            padding: 22px;
+        }
+
+        .inventory-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .inventory-item {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-grid" id="bgGrid"></div>
+
+    <div class="container">
+        <!-- Отображение имени игрока из ТГ -->
+        <div class="user-badge" id="usernameBadge">Загрузка...</div>
+
+        <!-- Баланс -->
+        <div class="balance-container" onclick="toggleCurrency()">
+            <div class="balance-title">Игровой баланс</div>
+            <div class="balance-value">
+                <span id="balanceAmount">0</span>
+                <span id="balanceCurrency">⭐</span>
+            </div>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="action-buttons">
+            <button class="btn" onclick="handleAction('deposit')">Пополнить</button>
+            <button class="btn" onclick="handleAction('withdraw')">Вывести</button>
+            <button class="btn" onclick="handleAction('swap')">Обменять</button>
+        </div>
+
+        <!-- Инвентарь наград -->
+        <div class="inventory-section">
+            <div class="inventory-title">Мои призы / Кейсы</div>
+            <div class="inventory-grid">
+                <div class="inventory-item">🎁</div>
+                <div class="inventory-item">💎</div>
+                <div class="inventory-item">⚡</div>
+                <div class="inventory-item"></div>
+                <div class="inventory-item"></div>
+                <div class="inventory-item"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        // Значения по умолчанию
+        let currentCurrency = 'stars';
+        let balances = { stars: 0, ton: 0.0 };
+
+        // Парсим данные, пришедшие из URL от нашего Python бота
+        const urlParams = new URLSearchParams(window.location.search);
+        const rawData = urlParams.get('user_data');
+
+        if (rawData) {
+            try {
+                const parsedData = JSON.parse(decodeURIComponent(rawData));
+                balances.stars = parsedData.stars;
+                balances.ton = parsedData.ton;
+                document.getElementById('usernameBadge').innerText = `@${parsedData.username}`;
+            } catch (e) {
+                document.getElementById('usernameBadge').innerText = `@Игрок`;
+            }
+        }
+
+        function renderBalance() {
+            if (currentCurrency === 'stars') {
+                document.getElementById('balanceAmount').innerText = balances.stars;
+                document.getElementById('balanceCurrency').innerText = '⭐';
+            } else {
+                document.getElementById('balanceAmount').innerText = balances.ton.toFixed(2);
+                document.getElementById('balanceCurrency').innerText = '💎';
+            }
+        }
+
+        function toggleCurrency() {
+            tg.HapticFeedback.impactOccurred('light');
+            currentCurrency = (currentCurrency === 'stars') ? 'ton' : 'stars';
+            renderBalance();
+        }
+
+        function handleAction(type) {
+            tg.HapticFeedback.notificationOccurred('success');
+            tg.showAlert(`Функция [${type}] синхронизирована с GiftsBattle API.`);
+        }
+
+        // Плавный скролл-параллакс фона сетки
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.getElementById('bgGrid').style.transform = `translateY(${scrolled * 0.22}px)`;
+        });
+
+        // Первая отрисовка
+        renderBalance();
+    </script>
+</body>
+</html>
