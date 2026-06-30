@@ -3,99 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GiftsBattle Analogue</title>
+    <title>GiftGrops Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: '-apple-system', BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: #000;
             color: #fff;
             overflow-x: hidden;
-            min-height: 130vh;
+            min-height: 100vh;
+            padding-bottom: 110px;
         }
 
-        /* Твой кастомный фон сетки */
+        /* Дышащий фон-сетка */
         .background-grid {
             position: fixed;
-            top: -10%;
-            left: 0;
-            width: 100%;
-            height: 120%;
+            top: -15%;
+            left: -5%;
+            width: 110%;
+            height: 130%;
             background-image: url('7a2685d318dd789773c2cac38696e8cb.jpg');
             background-size: cover;
             background-position: center;
-            z-index: -1;
-            transform: translateY(0);
-            transition: transform 0.1s ease-out;
+            z-index: -2;
+            animation: pulseBackground 7s ease-in-out infinite alternate;
+            will-change: transform, opacity;
+        }
+
+        @keyframes pulseBackground {
+            0% { transform: scale(1.0) translateY(0); opacity: 0.75; }
+            100% { transform: scale(1.06) translateY(-10px); opacity: 0.95; }
         }
 
         .container {
-            padding: 20px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
         }
 
-        /* Приветствие сверху как в GiftsBattle */
-        .user-badge {
-            background: rgba(255, 255, 255, 0.06);
-            padding: 6px 16px;
+        /* Шапка */
+        .header-profile {
+            width: 100%;
+            max-width: 390px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            font-size: 14px;
-            margin-top: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .burger-menu-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .avatar-container {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .username-text {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Кастомная звезда Telegram из photo_2026-06-30_16-56-12.jpg */
+        .tg-star-icon {
+            width: 48px;
+            height: 48px;
+            background-image: url('photo_2026-06-30_16-56-12.jpg');
+            background-size: cover;
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 10px;
+        }
+
+        .tg-star-small {
+            width: 18px;
+            height: 18px;
+            background-image: url('photo_2026-06-30_16-56-12.jpg');
+            background-size: cover;
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 4px;
+        }
+
+        /* Главный баланс */
         .balance-container {
             text-align: center;
-            margin-top: 40px;
-            margin-bottom: 35px;
+            margin-top: 30px;
+            margin-bottom: 25px;
             cursor: pointer;
             user-select: none;
         }
 
         .balance-title {
-            font-size: 12px;
+            font-size: 11px;
             color: #aaa;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .balance-value {
-            font-size: 48px;
+            font-size: 46px;
             font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
-        /* Сетчатая структура прозрачных кнопок */
+        /* Прозрачные iOS-кнопки */
         .action-buttons {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             width: 100%;
             max-width: 390px;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
         .btn {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: #fff;
-            padding: 16px 5px;
-            border-radius: 18px;
+            padding: 14px 5px;
+            border-radius: 16px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -103,29 +171,33 @@
         }
 
         .btn:active {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(0.96);
         }
 
-        /* Секция инвентаря под GiftsBattle */
-        .inventory-section {
+        /* Стеклянные карточки разделов */
+        .main-card {
             width: 100%;
             max-width: 390px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 26px;
-            padding: 22px;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 15px;
         }
 
-        .inventory-title {
-            font-size: 18px;
+        .card-title {
+            font-size: 17px;
             font-weight: 700;
             margin-bottom: 15px;
-            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
+        /* Инвентарь */
         .inventory-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -134,13 +206,167 @@
 
         .inventory-item {
             aspect-ratio: 1;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .inventory-item:active {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .empty-label {
+            grid-column: span 3;
+            text-align: center;
+            color: #8e8e93;
+            font-size: 14px;
+            padding: 20px 0;
+        }
+
+        /* Игра Краш (Stellar Rocket) из photo_2026-06-30_17-31-00.jpg */
+        .crash-arena {
+            width: 100%;
+            height: 220px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+        }
+
+        .crash-blur-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .rocket-object {
+            width: 75px;
+            height: 75px;
+            background-image: url('photo_2026-06-30_17-31-00.jpg');
+            background-size: cover;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            will-change: transform;
+            display: none;
+        }
+
+        .multiplier-display {
+            font-size: 38px;
+            font-weight: 800;
+            color: #34c759;
+            z-index: 5;
+        }
+
+        .crash-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .crash-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            padding: 12px;
+            font-size: 14px;
+            outline: none;
+            text-align: center;
+        }
+
+        /* Выезжающие панели */
+        .tab-content { display: none; width: 100%; }
+        .tab-content.active { display: block; }
+
+        /* Нижнее меню */
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 390px;
+            height: 68px;
+            background: rgba(15, 15, 15, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #8e8e93;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            gap: 4px;
+            height: 100%;
+        }
+
+        .nav-item.active { color: #bf5af2; }
+
+        /* Окна модалок для обмена/пополнения */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: rgba(25, 25, 25, 0.85);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 350px;
+            padding: 20px;
+        }
+
+        .instruction-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 10px;
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 10px;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -149,92 +375,256 @@
     <div class="background-grid" id="bgGrid"></div>
 
     <div class="container">
-        <!-- Отображение имени игрока из ТГ -->
-        <div class="user-badge" id="usernameBadge">Загрузка...</div>
+        <!-- Шапка -->
+        <div class="header-profile">
+            <div class="header-left">
+                <button class="burger-menu-btn" onclick="tg.showAlert('Инфо-меню:\nИспользуйте вкладки внизу для быстрого перехода.')">☰</button>
+                <div class="username-text" id="usernameBadge">Загрузка...</div>
+            </div>
+            <div class="avatar-container" id="userAvatar">G</div>
+        </div>
 
         <!-- Баланс -->
         <div class="balance-container" onclick="toggleCurrency()">
-            <div class="balance-title">Игровой баланс</div>
+            <div class="balance-title">Баланс GiftGrops</div>
             <div class="balance-value">
-                <span id="balanceAmount">0</span>
-                <span id="balanceCurrency">⭐</span>
+                <span id="balanceAmount">0</span> 
+                <span id="balanceCurrency"><div class="tg-star-icon"></div></span>
             </div>
+            <div style="font-size: 12px; color: #8e8e93; margin-top: 4px;">Кликни для конвертации в TON 💎</div>
         </div>
 
         <!-- Кнопки действий -->
         <div class="action-buttons">
-            <button class="btn" onclick="handleAction('deposit')">Пополнить</button>
-            <button class="btn" onclick="handleAction('withdraw')">Вывести</button>
-            <button class="btn" onclick="handleAction('swap')">Обменять</button>
+            <button class="btn" onclick="openModal('depositModal')">📥 Пополнить</button>
+            <button class="btn" onclick="openModal('withdrawModal')">📤 Вывести</button>
+            <button class="btn" onclick="openModal('swapModal')">🔄 Обменять</button>
         </div>
 
-        <!-- Инвентарь наград -->
-        <div class="inventory-section">
-            <div class="inventory-title">Мои призы / Кейсы</div>
-            <div class="inventory-grid">
-                <div class="inventory-item">🎁</div>
-                <div class="inventory-item">💎</div>
-                <div class="inventory-item">⚡</div>
-                <div class="inventory-item"></div>
-                <div class="inventory-item"></div>
-                <div class="inventory-item"></div>
+        <!-- ВКЛАДКА: ПРОФИЛЬ -->
+        <div id="tab-profile" class="tab-content active">
+            <div class="main-card">
+                <div class="card-title">🛍️ Мои NFT и Подарки</div>
+                <div class="inventory-grid" id="inventoryGrid">
+                    <div class="empty-label">Пока пусто 🫙</div>
+                </div>
             </div>
+            
+            <div class="main-card">
+                <div class="card-title">🎧 Поддержка & Выдача</div>
+                <div class="info-text-box" style="font-size: 13px; color: #ccc;">
+                    Возникли вопросы или хотите забрать выведенные NFT? Наш единый бот поддержки и автоматической выдачи подарков всегда на связи.
+                </div>
+                <button class="btn" style="width:100%; margin-top:5px;" onclick="tg.openTelegramLink('https://t.me/wardhot')">🤖 Написать в поддержку</button>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА: КЕЙСЫ -->
+        <div id="tab-cases" class="tab-content">
+            <div class="main-card">
+                <div class="card-title">📦 Лента выигрышей онлайн</div>
+                <div style="font-size:12px; color:#34c759; margin-bottom:10px; font-family:monospace;" id="liveDrop">@user*** выиграл NFT «Мишка» в бомж-кейсе!</div>
+                <div class="card-title">Фирменные кейсы</div>
+                <button class="btn" style="width:100%; background:rgba(191,90,242,0.2);" onclick="tg.showAlert('Кейсы настраиваются администрацией!')">Покрутить кейс ☘️</button>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА: ИГРЫ (СОЛО РЕЖИМ) -->
+        <div id="tab-games" class="tab-content">
+            <div class="main-card">
+                <div class="card-title">🚀 Соло режим: Краш (Stellar Rocket)</div>
+                
+                <div class="crash-arena" id="arena">
+                    <div class="crash-blur-overlay" id="crashOverlay">
+                        <div style="font-size:16px; font-weight:bold; margin-bottom:5px;" id="timerLabel">Ожидание ставок...</div>
+                        <div style="font-size:24px; font-weight:800; color:#bf5af2;" id="crashTimer">15.0с</div>
+                    </div>
+                    <div class="rocket-object" id="rocket"></div>
+                    <div class="multiplier-display" id="multiplier">1.00x</div>
+                </div>
+
+                <div class="crash-input-group">
+                    <input type="number" class="crash-input" id="betAmount" value="1" placeholder="Ставка">
+                    <select class="crash-input" id="betCurrency">
+                        <option value="stars">Stars (<div class="tg-star-small"></div>)</option>
+                        <option value="ton">TON 💎</option>
+                    </select>
+                </div>
+
+                <button class="btn" style="width:100%; background:#34c759; color:#000; font-weight:bold;" id="crashBtn" onclick="placeCrashBet()">ПОСТАВИТЬ СТАВКУ</button>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА: РЕФЕРАЛЫ -->
+        <div id="tab-refs" class="tab-content">
+            <div class="main-card">
+                <div class="card-title">👥 Реферальная система</div>
+                <div class="info-text-box">Получай по <b>2 Stars</b> за каждого приглашенного пользователя!</div>
+                <input type="text" class="crash-input" style="width:100%; text-align:left; margin-bottom:10px;" id="refLink" readonly value="Загрузка ссылки...">
+                <button class="btn" style="width:100%;" onclick="copyRef()">📋 Скопировать ссылку</button>
+                <button class="btn" style="width:100%; margin-top:10px; background:rgba(52,199,89,0.2);" onclick="tg.showAlert('Баланс рефералов проверен и зачислен на игровой счет!')">💸 Вывести реф. баланс</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- МОДАЛКА: ПОПОЛНЕНИЕ -->
+    <div class="modal" id="depositModal">
+        <div class="modal-content">
+            <div class="card-title">📥 Пополнение счета</div>
+            <div style="font-size:12px; margin-bottom:10px;">Выберите платежную систему:</div>
+            <button class="btn" style="width:100%; margin-bottom:8px; text-align:left;" onclick="payStars()">⭐️ Telegram Stars (от 1 ⭐️)</button>
+            <button class="btn" style="width:100%; margin-bottom:8px; text-align:left;" onclick="payTonkeeper('TON')">💎 Tonkeeper / TON (от 0.5 TON)</button>
+            <button class="btn" style="width:100%; margin-bottom:8px; text-align:left;" onclick="payTonkeeper('USDT')">💵 Crypto Bot / USDT</button>
+            <button class="btn" style="width:100%; margin-bottom:12px; text-align:left;" onclick="showNftIns()">🎁 NFT Подарки</button>
+            
+            <div id="nftInstruction" style="display:none;" class="instruction-box">
+                <b>Инструкция для NFT:</b> Отправьте ваш NFT-подарок официальному трансфер-боту. Наша автоматика проверит блокчейн и начислит баланс.
+            </div>
+            <button class="btn" style="width:100%; background:#ff3b30;" onclick="closeModal('depositModal')">Закрыть</button>
         </div>
     </div>
 
+    <!-- МОДАЛКА: ВЫВОД -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+            <div class="card-title">📤 Вывод призов</div>
+            <div class="info-text-box" style="font-size:13px;">Вывод доступен исключительно в виде Telegram NFT-подарков и звездных сувениров (Мишка, Розы, Алмазы).</div>
+            <button class="btn" style="width:100%;" onclick="tg.openTelegramLink('https://t.me/wardhot')">Запросить вывод у @wardhot</button>
+            <button class="btn" style="width:100%; margin-top:10px; background:#ff3b30;" onclick="closeModal('withdrawModal')">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА: ОБМЕН -->
+    <div class="modal" id="swapModal">
+        <div class="modal-content">
+            <div class="card-title">🔄 P2P Обменник</div>
+            <input type="text" class="crash-input" style="width:100%; margin-bottom:10px;" placeholder="Юзернейм получателя обмена">
+            <input type="text" class="crash-input" style="width:100%; margin-bottom:10px;" placeholder="Какое NFT отдаете">
+            <button class="btn" style="width:100%; background:#34c759; color:#000;" onclick="tg.showAlert('Заявка на обмен создана! Ожидайте подтверждения от второго участника.')">Предложить обмен</button>
+            <button class="btn" style="width:100%; margin-top:10px; background:#ff3b30;" onclick="closeModal('swapModal')">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Стеклянное нижнее меню -->
+    <div class="bottom-nav">
+        <div class="nav-item active" id="btn-profile" onclick="switchTab('profile')"><span>👤 Профиль</span></div>
+        <div class="nav-item" id="btn-cases" onclick="switchTab('cases')"><span>📦 Кейсы</span></div>
+        <div class="nav-item" id="btn-games" onclick="switchTab('games')"><span>🎮 Соло</span></div>
+        <div class="nav-item" id="btn-refs" onclick="switchTab('refs')"><span>👥 Реф</span></div>
+    </div>
+
     <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-
-        // Значения по умолчанию
         let currentCurrency = 'stars';
-        let balances = { stars: 0, ton: 0.0 };
+        let balances = { stars: 750, ton: 12.4 };
+        let isRef = false;
+        let crashState = 'waiting'; 
 
-        // Парсим данные, пришедшие из URL от нашего Python бота
+        // Инициализация данных
         const urlParams = new URLSearchParams(window.location.search);
         const rawData = urlParams.get('user_data');
-
-        if (rawData) {
+        if(rawData) {
             try {
-                const parsedData = JSON.parse(decodeURIComponent(rawData));
-                balances.stars = parsedData.stars;
-                balances.ton = parsedData.ton;
-                document.getElementById('usernameBadge').innerText = `@${parsedData.username}`;
-            } catch (e) {
-                document.getElementById('usernameBadge').innerText = `@Игрок`;
-            }
-        }
-
-        function renderBalance() {
-            if (currentCurrency === 'stars') {
-                document.getElementById('balanceAmount').innerText = balances.stars;
-                document.getElementById('balanceCurrency').innerText = '⭐';
-            } else {
-                document.getElementById('balanceAmount').innerText = balances.ton.toFixed(2);
-                document.getElementById('balanceCurrency').innerText = '💎';
-            }
+                const p = JSON.parse(decodeURIComponent(rawData));
+                balances.stars = p.stars; balances.ton = p.ton;
+                document.getElementById('usernameBadge').innerText = p.username;
+                document.getElementById('refLink').value = `https://t.me/GropsBot?start=ref_${p.id}`;
+                
+                // Наполнение инвентаря кастомными элементами
+                const grid = document.getElementById('inventoryGrid');
+                if(p.inventory && p.inventory.length > 0) {
+                    grid.innerHTML = '';
+                    p.inventory.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'inventory-item';
+                        div.innerHTML = `<span>${item}</span><span style="font-size:10px; color:#aaa; margin-top:5px;">NFT</span>`;
+                        div.onclick = () => tg.showAlert(`Предмет: ${item}\nЦенность: 125 ⭐️.\nВы можете вывести его через @wardhot или обменять.`);
+                        grid.appendChild(div);
+                    });
+                }
+            } catch(e){}
         }
 
         function toggleCurrency() {
-            tg.HapticFeedback.impactOccurred('light');
             currentCurrency = (currentCurrency === 'stars') ? 'ton' : 'stars';
-            renderBalance();
+            if(currentCurrency === 'stars') {
+                document.getElementById('balanceAmount').innerText = balances.stars;
+                document.getElementById('balanceCurrency').innerHTML = `<div class="tg-star-icon"></div>`;
+            } else {
+                document.getElementById('balanceAmount').innerText = balances.ton.toFixed(2);
+                document.getElementById('balanceCurrency').innerHTML = `💎`;
+            }
         }
 
-        function handleAction(type) {
-            tg.HapticFeedback.notificationOccurred('success');
-            tg.showAlert(`Функция [${type}] синхронизирована с GiftsBattle API.`);
+        function switchTab(name) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-${name}`).classList.add('active');
+            document.getElementById(`btn-${name}`).classList.add('active');
         }
 
-        // Плавный скролл-параллакс фона сетки
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            document.getElementById('bgGrid').style.transform = `translateY(${scrolled * 0.22}px)`;
-        });
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function showNftIns() { document.getElementById('nftInstruction').style.display = 'block'; }
 
-        // Первая отрисовка
-        renderBalance();
+        function payStars() { tg.showAlert("Запрос к API Telegram Stars отправлен. Минимальная сумма пополнения: 1 ⭐️"); }
+        function payTonkeeper(asset) { tg.showAlert(`Генерация смарт-контракта инвойса для привязанного Tonkeeper/CryptoBot кошелька на оплату ${asset}. Ожидание подписи транзакции...`); }
+        function copyRef() { document.getElementById('refLink').select(); document.execCommand('copy'); tg.showAlert('Реферальная ссылка скопирована!'); }
+
+        // Эмуляция Краш игры (Stellar Rocket)
+        let timer = 15.0;
+        setInterval(() => {
+            if(crashState === 'waiting') {
+                timer -= 0.1;
+                if(timer <= 0) {
+                    crashState = 'flying';
+                    document.getElementById('crashOverlay').style.display = 'none';
+                    startRocketFlight();
+                } else {
+                    document.getElementById('crashTimer').innerText = timer.toFixed(1) + 'с';
+                }
+            }
+        }, 100);
+
+        function startRocketFlight() {
+            let mult = 1.00;
+            let rocket = document.getElementById('rocket');
+            rocket.style.display = 'block';
+            let crashPoint = (Math.random() * 3.5 + 1.01).toFixed(2);
+            if(Math.random() < 0.15) crashPoint = 1.00; // Шанс моментального взрыва на земле
+
+            let flightInterval = setInterval(() => {
+                mult += 0.02;
+                document.getElementById('multiplier').innerText = mult.toFixed(2) + 'x';
+                
+                // Эффект полета и кручения
+                let progress = (mult - 1) * 30;
+                rocket.style.transform = `translate(${progress}px, -${progress}px) rotate(${mult*20}deg)`;
+
+                if(mult >= crashPoint) {
+                    clearInterval(flightInterval);
+                    document.getElementById('multiplier').innerText = '💥 КРАШ @ ' + crashPoint + 'x';
+                    setTimeout(() => {
+                        rocket.style.display = 'none';
+                        rocket.style.transform = 'none';
+                        document.getElementById('crashOverlay').style.display = 'flex';
+                        timer = 15.0;
+                        crashState = 'waiting';
+                    }, 2000);
+                }
+            }, 50);
+        }
+
+        function placeCrashBet() { tg.showAlert("Ставка успешно принята! Ожидайте взлета Stellar Rocket."); }
+
+        // Живая лента дропов
+        setInterval(() => {
+            const items = ['Мишка 🧸', 'Календарь 📅', 'Алмаз 💎', 'Роза 🌹'];
+            const randItem = items[Math.floor(Math.random() * items.length)];
+            document.getElementById('liveDrop').innerText = `@user${Math.floor(Math.random()*900+100)}*** выиграл NFT «${randItem}»!`;
+        }, 4000);
+
+        document.getElementById('balanceAmount').innerText = balances.stars;
     </script>
 </body>
 </html>
