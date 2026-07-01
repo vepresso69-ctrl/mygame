@@ -72,8 +72,15 @@
 
         .pill-icon-star {
             width: 16px; height: 16px;
-            background-image: url('photo_2026-06-30_16-56-12.jpg');
-            background-size: cover; border-radius: 3px;
+            background: #eab308;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pill-icon-star::before {
+            content: '⭐';
+            font-size: 10px;
         }
 
         /* КАРТОЧКИ СТЕКЛЯННОГО СТИЛЯ (GLASSMORPHISM) */
@@ -170,7 +177,7 @@
             font-weight: 500;
         }
 
-        /* ПОДРАЗДЕЛЫ МИНЫ И ДАЙС (ИНТЕРФЕЙСЫ НА БУДУЩЕЕ) */
+        /* ПОДРАЗДЕЛЫ МИНЫ И ДАЙС */
         .subgame-container {
             display: none;
             flex-direction: column;
@@ -181,7 +188,6 @@
             display: flex;
         }
 
-        /* Специфическая сетка для мин */
         .mines-grid-mock {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -241,7 +247,7 @@
         }
         .bet-currency-select option { background: #131926; }
 
-        /* ИОС КНОПКА ДЕЙСТВИЯ */
+        /* КНОПКИ БРЕНДА */
         .action-game-btn {
             width: 100%;
             height: 50px;
@@ -257,13 +263,20 @@
             justify-content: center;
             letter-spacing: 0.3px;
         }
-        .btn-state-bet { background: #2563eb; color: #fff; }
+        .btn-state-bet { background: #2563eb; color: #ffffff; }
         .btn-state-bet:active { background: #1d4ed8; }
-        .btn-state-waiting { background: #2e3748; color: #8e94a0; cursor: not-allowed; }
-        .btn-state-cashout { background: #10b981; color: #fff; }
-        .btn-state-cashout:active { background: #059669; }
+        .btn-state-waiting { background: #000000; color: #8e94a0; border: 1px solid rgba(255, 255, 255, 0.1); cursor: not-allowed; }
+        .btn-state-cashout { background: #ffffff; color: #000000; }
+        .btn-state-cashout:active { background: #e5e7eb; }
 
-        /* ЖИВАЯ ЛЕНТА ДРОПОВ С КЕЙСОВ */
+        .btn-black { background: #000000; color: #ffffff; border: 1px solid rgba(255,255,255,0.1); }
+        .btn-black:active { background: #111111; }
+        .btn-white { background: #ffffff; color: #000000; }
+        .btn-white:active { background: #e5e7eb; }
+        .btn-blue { background: #2563eb; color: #ffffff; }
+        .btn-blue:active { background: #1d4ed8; }
+
+        /* ЖИВАЯ ЛЕНТА ДРОПОВ */
         .live-drops-stream {
             display: flex;
             gap: 8px;
@@ -317,10 +330,134 @@
             align-items: center;
             transition: background 0.2s ease, color 0.2s ease;
         }
-        .online-bet-row.state-win { background: rgba(16, 185, 129, 0.08); color: #34d399; }
-        .online-bet-row.state-lost { background: rgba(239, 68, 68, 0.06); color: #f87171; }
+        .online-bet-row.state-win { background: rgba(37, 99, 235, 0.1); color: #3b82f6; }
+        .online-bet-row.state-lost { background: rgba(255, 255, 255, 0.02); color: #8e94a0; }
 
-        /* МЕНЮ И ДРУГИЕ ВЫЗОВЫ */
+        /* РЕФЕРАЛЬНАЯ СИСТЕМА */
+        .ref-instruction-box {
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 14px;
+            padding: 4px 0;
+        }
+        .ref-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #d1d5db;
+            margin-bottom: 12px;
+        }
+        .ref-step:last-child { margin-bottom: 0; }
+        .ref-step-num {
+            background: #2563eb;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .ref-buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 10px;
+            margin-bottom: 18px;
+        }
+        .ref-counter-panel {
+            background: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .ref-counter-title { font-size: 14px; font-weight: 600; color: #ffffff; }
+        .ref-counter-value { font-size: 20px; font-weight: 700; color: #2563eb; }
+
+        /* ИНТЕРФЕЙС РАЗДЕЛА АПГРЕЙД */
+        .upgrade-circle-container {
+            width: 100%;
+            height: 190px;
+            background: radial-gradient(circle, rgba(20,27,45,1) 0%, rgba(5,8,15,1) 70%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.03);
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .upgrade-circle-outer {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #1a233d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+        .upgrade-circle-inner {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            text-align: center;
+            max-width: 120px;
+        }
+        .upgrade-split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .upgrade-select-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .upgrade-select-box:active { background: rgba(255, 255, 255, 0.05); }
+        .upgrade-box-label { font-size: 12px; color: #8e94a0; font-weight: 500; }
+        .upgrade-box-icon { font-size: 24px; margin: 8px 0; color: #4b5563; }
+        .upgrade-box-itemname { font-size: 13px; font-weight: 600; color: #fff; }
+        .upgrade-action-row {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+        .upgrade-small-square-btn {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .upgrade-subtext { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+        /* ПРОФИЛЬ, МЕНЮ И МОДАЛКИ */
         .profile-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
         .btn-menu {
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.04);
@@ -329,35 +466,39 @@
         }
         .btn-menu:active { background: rgba(255, 255, 255, 0.06); }
 
-        .inventory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .inventory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
         .inventory-item {
             aspect-ratio: 1; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 20px;
+            border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;
         }
+        .empty-label { grid-column: 1 / -1; text-align: center; color: #8e94a0; padding: 20px 0; font-size: 14px; }
         
+        /* КЛАССЫ ВКЛАДОК */
         .tab-content { display: none; width: 100%; }
         .tab-content.active { display: block; }
 
-        /* НАВБАР ИОС */
+        /* НАВБАР С ПЯТЬЮ КНОПКАМИ */
         .bottom-nav {
             position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
             width: calc(100% - 24px); max-width: 390px; height: 64px;
             background: rgba(19, 26, 43, 0.85); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 20px;
-            display: grid; grid-template-columns: repeat(4, 1fr); padding: 4px; z-index: 100;
+            display: grid; grid-template-columns: repeat(5, 1fr); padding: 4px; z-index: 100;
         }
         .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6b7280; cursor: pointer; border-radius: 16px; }
-        .nav-text { font-size: 11px; font-weight: 600; margin-top: 2px; }
+        .nav-text { font-size: 10px; font-weight: 600; margin-top: 2px; }
         .nav-item.active { color: #2563eb; background: rgba(37, 99, 235, 0.05); }
 
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(15px); z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: #131926; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; width: 100%; max-width: 340px; padding: 20px; }
+        
+        .selector-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; max-height: 200px; overflow-y: auto; }
+        .selector-row { background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- ВЕРХНЯЯ СТРОКА БАЛАНСОВ -->
         <div class="header-container">
             <div class="header-username" id="usernameBadge">Загрузка...</div>
             <div class="header-balances">
@@ -365,28 +506,18 @@
                     <div class="pill-icon-star"></div>
                     <span id="starsBalanceDisplay">0</span>
                 </div>
-                <div class="balance-pill">
-                    <span>💎</span>
-                    <span id="tonBalanceDisplay">0.00</span>
-                </div>
             </div>
         </div>
 
-        <!-- КЕЙСОВЫЙ ЖИВОЙ ДРОП СТРИМ (КАК НА КЕЙС-САЙТАХ) -->
-        <div class="live-drops-stream" id="liveDropsStream">
-            <!-- Элементы генерируются скриптом автоматически -->
-        </div>
+        <div class="live-drops-stream" id="liveDropsStream"></div>
 
-        <!-- ВКЛАДКА: СОЛО ИГРЫ (ОСНОВНАЯ) -->
         <div id="tab-games" class="tab-content active">
-            <!-- Родные Переключатели Подразделов -->
             <div class="modes-switcher">
                 <div class="mode-tab active" id="subtab-btn-crash" onclick="switchSubGame('crash')">🚀 Краш</div>
                 <div class="mode-tab" id="subtab-btn-mines" onclick="switchSubGame('mines')">💣 Мины</div>
                 <div class="mode-tab" id="subtab-btn-dice" onclick="switchSubGame('dice')">🎰 Дайс</div>
             </div>
 
-            <!-- ПОДРАЗДЕЛ: КРАШ -->
             <div id="subgame-crash" class="subgame-container active">
                 <div class="main-card" style="padding: 12px;">
                     <div class="crash-display-area">
@@ -410,7 +541,6 @@
                     <button id="mainCrashBtn" class="action-game-btn btn-state-bet" onclick="handleCrashBtnClick()">ПОСТАВИТЬ СТАВКУ</button>
                 </div>
 
-                <!-- Таблица онлайн игроков -->
                 <div class="main-card">
                     <div class="card-title" style="margin-bottom: 8px;">🔥 Онлайн ставки</div>
                     <div class="online-bets-container">
@@ -424,30 +554,69 @@
                 </div>
             </div>
 
-            <!-- ПОДРАЗДЕЛ: МИНЫ -->
             <div id="subgame-mines" class="subgame-container">
                 <div class="main-card">
                     <div class="card-title">Поле мин (Режим разработки)</div>
                     <div class="mines-grid-mock">
                         <div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div>
                         <div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div>
-                        <div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div><div class="mine-cell-mock">🔹</div>
                     </div>
-                    <button class="action-game-btn btn-state-bet" onclick="Telegram.WebApp.showAlert('Режим «Мины» станет доступен сразу после тестов!')">ИГРАТЬ В МИНЫ</button>
+                    <button class="action-game-btn btn-blue" onclick="Telegram.WebApp.showAlert('Режим «Мины» станет доступен сразу после тестов!')">ИГРАТЬ В МИНЫ</button>
                 </div>
             </div>
 
-            <!-- ПОДРАЗДЕЛ: ДАЙС -->
             <div id="subgame-dice" class="subgame-container">
                 <div class="main-card">
                     <div class="card-title">Дайс (Режим разработки)</div>
                     <div style="text-align:center; padding: 20px 0; font-size: 14px; color:#8e94a0;">Установите шанс выигрыша и бросайте кости.</div>
-                    <button class="action-game-btn btn-state-bet" onclick="Telegram.WebApp.showAlert('Режим «Дайс» находится на стадии финальной верстки!')">КРУТИТЬ КУБИК</button>
+                    <button class="action-game-btn btn-blue" onclick="Telegram.WebApp.showAlert('Режим «Дайс» находится на стадии финальной верстки!')">КРУТИТЬ КУБИК</button>
                 </div>
             </div>
         </div>
 
-        <!-- ВКЛАДКА: ПРОФИЛЬ -->
+        <div id="tab-cases" class="tab-content">
+            <div class="main-card">
+                <div class="card-title">📦 Кейсы</div>
+                <button class="action-game-btn btn-blue" onclick="Telegram.WebApp.showAlert('Кейсы на интеграции платежей.')">Открыть тестовый кейс</button>
+            </div>
+        </div>
+
+        <div id="tab-upgrade" class="tab-content">
+            <div class="main-card">
+                <div class="card-title">🔺 Апгрейд предметов</div>
+                
+                <div class="upgrade-circle-container">
+                    <div class="upgrade-circle-outer">
+                        <div class="upgrade-circle-inner" id="upgradeStatusText">Выберите предмет</div>
+                    </div>
+                </div>
+
+                <div class="upgrade-split-grid">
+                    <div class="upgrade-select-box" onclick="openUpgradeSelector('mine')">
+                        <div class="upgrade-box-label">Ваш предмет</div>
+                        <div class="upgrade-box-icon" id="upBoxMineIcon">🔽</div>
+                        <div class="upgrade-box-itemname" id="upBoxMineName">Не выбран</div>
+                    </div>
+                    <div class="upgrade-select-box" onclick="openUpgradeSelector('target')">
+                        <div class="upgrade-box-label">Желаемый предмет</div>
+                        <div class="upgrade-box-icon" id="upBoxTargetIcon">🔼</div>
+                        <div class="upgrade-box-itemname" id="upBoxTargetName">Не выбран</div>
+                    </div>
+                </div>
+
+                <div class="upgrade-action-row">
+                    <div class="upgrade-small-square-btn" onclick="Telegram.WebApp.showAlert('Быстрый выбор включен')">⚡️</div>
+                    <div class="upgrade-small-square-btn" onclick="clearUpgradeSelections()">+</div>
+                    <button class="action-game-btn btn-blue" style="flex:1;" onclick="processUpgrade()">
+                        <div>
+                            <div>🔺 Апгрейд</div>
+                            <div class="upgrade-subtext" id="upgradeChanceLabel">Шанс выигрыша 0%</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <div id="tab-profile" class="tab-content">
             <div class="main-card">
                 <div class="card-title" style="text-align: center;">Управление кошельком</div>
@@ -465,49 +634,96 @@
             </div>
         </div>
 
-        <!-- ОСТАЛЬНЫЕ ВКЛАДКИ -->
-        <div id="tab-cases" class="tab-content">
-            <div class="main-card">
-                <div class="card-title">📦 Кейсы</div>
-                <button class="action-game-btn btn-state-bet" onclick="Telegram.WebApp.showAlert('Кейсы на интеграции платежей.')">Открыть тестовый кейс</button>
-            </div>
-        </div>
-
         <div id="tab-refs" class="tab-content">
             <div class="main-card">
-                <div class="card-title">👥 Реферальная система</div>
-                <input type="text" class="bet-input-field" style="background:rgba(255,255,255,0.03); padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.05);" id="refLink" readonly value="Генерация...">
+                <div class="card-title">ℹ️ Инструкция программы</div>
+                <div class="ref-instruction-box">
+                    <div class="ref-step">
+                        <div class="ref-step-num">1</div>
+                        <div>Скопируйте вашу личную инвайт-ссылку или отправьте напрямую друзьям в контакты.</div>
+                    </div>
+                    <div class="ref-step">
+                        <div class="ref-step-num">2</div>
+                        <div>Друг заходит в приложение и становится вашим рефералом. За каждого приглашенного вы получаете фиксированную награду.</div>
+                    </div>
+                    <div class="ref-step">
+                        <div class="ref-step-num">3</div>
+                        <div>Ваш баланс пополняется на <b>2 звезды</b> за одного человека, которые доступны для игр и кейсов!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-card">
+                <div class="card-title">🎮 Панель управления рефералами</div>
+                
+                <div class="bet-input-wrapper" style="margin-bottom: 8px;">
+                    <input type="text" class="bet-input-field" id="refLink" readonly value="Генерация ссылки...">
+                </div>
+
+                <div class="ref-buttons-grid">
+                    <button class="action-game-btn btn-white" style="height: 44px; font-size: 13px;" onclick="copyRefLink()">📋 Скопировать</button>
+                    <button class="action-game-btn btn-blue" style="height: 44px; font-size: 13px;" onclick="shareToContacts()">✈️ Отправить</button>
+                </div>
+
+                <div class="ref-counter-panel">
+                    <div class="ref-counter-title">Приглашено людей:</div>
+                    <div class="ref-counter-value" id="refCounterDisplay">0</div>
+                </div>
+
+                <button class="action-game-btn btn-black" onclick="Telegram.WebApp.showAlert('Заявка на выплату реферального бонуса отправлена в обработку.')">💰 ВЫВЕСТИ НАГРАДУ</button>
             </div>
         </div>
     </div>
 
-    <!-- iOS СТИЛЬ МЕНЮ НАВИГАЦИИ -->
     <div class="bottom-nav">
-        <div class="nav-item" id="btn-profile" onclick="switchTab('profile')">
-            <span style="font-size:16px;">👤</span><div class="nav-text">Профиль</div>
-        </div>
         <div class="nav-item" id="btn-cases" onclick="switchTab('cases')">
             <span style="font-size:16px;">📦</span><div class="nav-text">Кейсы</div>
+        </div>
+        <div class="nav-item" id="btn-upgrade" onclick="switchTab('upgrade')">
+            <span style="font-size:16px;">🔺</span><div class="nav-text">Апгрейд</div>
         </div>
         <div class="nav-item active" id="btn-games" onclick="switchTab('games')">
             <span style="font-size:16px;">🎮</span><div class="nav-text">Соло</div>
         </div>
+        <div class="nav-item" id="btn-profile" onclick="switchTab('profile')">
+            <span style="font-size:16px;">👤</span><div class="nav-text">Профиль</div>
+        </div>
         <div class="nav-item" id="btn-refs" onclick="switchTab('refs')">
-            <span style="font-size:16px;">👥</span><div class="nav-text">Реф</div>
+            <span style="font-size:16px;">👥</span><div class="nav-text">Рефералы</div>
         </div>
     </div>
 
-    <!-- ТИХИЕ МОДАЛКИ -->
-    <div class="modal" id="depositModal"><div class="modal-content"><div class="card-title">📥 Пополнение</div><button class="action-game-btn btn-state-bet" onclick="closeModal('depositModal')">Закрыть</button></div></div>
-    <div class="modal" id="withdrawModal"><div class="modal-content"><div class="card-title">📤 Вывод</div><button class="action-game-btn btn-state-bet" onclick="closeModal('withdrawModal')">Закрыть</button></div></div>
-    <div class="modal" id="swapModal"><div class="modal-content"><div class="card-title">🔄 Обмен</div><button class="action-game-btn btn-state-bet" onclick="closeModal('swapModal')">Закрыть</button></div></div>
+    <div class="modal" id="depositModal"><div class="modal-content"><div class="card-title">📥 Пополнение</div><button class="action-game-btn btn-blue" onclick="closeModal('depositModal')">Закрыть</button></div></div>
+    <div class="modal" id="withdrawModal"><div class="modal-content"><div class="card-title">📤 Вывод</div><button class="action-game-btn btn-blue" onclick="closeModal('withdrawModal')">Закрыть</button></div></div>
+    <div class="modal" id="swapModal"><div class="modal-content"><div class="card-title">🔄 Обмен</div><button class="action-game-btn btn-blue" onclick="closeModal('swapModal')">Закрыть</button></div></div>
+
+    <div class="modal" id="upgradeSelectModal">
+        <div class="modal-content">
+            <div class="card-title" id="upgradeModalTitle">Выберите предмет</div>
+            <div class="selector-list" id="upgradeSelectorList"></div>
+            <button class="action-game-btn btn-black" style="margin-top:12px; height:40px;" onclick="closeModal('upgradeSelectModal')">Отмена</button>
+        </div>
+    </div>
 
     <script>
         // ИГРОВОЕ СОСТОЯНИЕ И ДАННЫЕ
         let userBalances = { stars: 150, ton: 4.20 };
+        let userInventory = ['🧸 Календарь', '📦 Кейс Stars', '⚡️ Premium'];
+        
+        const upgradeItemsPool = [
+            { name: '🧸 Календарь', cost: 10, icon: '🧸' },
+            { name: '📦 Кейс Stars', cost: 25, icon: '📦' },
+            { name: '⚡️ Premium', cost: 50, icon: '⚡️' },
+            { name: '💎 Алмаз', cost: 150, icon: '💎' },
+            { name: '👑 Ролекс', cost: 500, icon: '👑' }
+        ];
+
+        let selectedMineItem = null;
+        let selectedTargetItem = null;
+
         let crashState = {
             phase: 'waiting', 
-            timer: 6.0,
+            timer: 5.0,
             currentMultiplier: 1.00,
             crashPoint: 2.15,
             myBet: null, 
@@ -515,11 +731,11 @@
             betCurrency: 'stars'
         };
 
-        const botNames = ['@crypto_boss', '@ton_shark', '@whale_tg', '@star_miner', '@lucky_user', '@grops_fan', '@nft_holder', '@sol_trader'];
-        const dropItems = ['熊 Мишка 🧸', '📅 Календарь', '💎 Алмаз', '⚡️ Premium', '📦 Кейс Stars'];
+        const botNames = ['@crypto_boss', '@ton_shark', '@whale_tg', '@star_miner', '@lucky_user', '@grops_fan'];
+        const dropItems = ['🧸 Календарь', '💎 Алмаз', '⚡️ Premium', '📦 Кейс Stars'];
         let currentRoundPlayers = [];
 
-        // CANVAS ЛОГИКА ОТРЕНДЕРИВАНИЯ ГРАФИКА ЛЕТЯЩЕЙ РАКЕТЫ
+        // CANVAS ЛОГИКА
         const canvas = document.getElementById('crashCanvas');
         const ctx = canvas.getContext('2d');
         function resizeCanvas() {
@@ -529,7 +745,7 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // ОБРАБОТКА ДАННЫХ ИЗ ССЫЛКИ БЭКЕНДА
+        // ОБРАБОТКА ДАННЫХ Telegram URL
         const urlParams = new URLSearchParams(window.location.search);
         const rawData = urlParams.get('user_data');
         if(rawData) {
@@ -539,155 +755,197 @@
                 userBalances.ton = p.ton;
                 document.getElementById('usernameBadge').innerText = p.username;
                 document.getElementById('refLink').value = `https://t.me/GiftGrops_Bot?start=ref_${p.id}`;
-                
-                const grid = document.getElementById('inventoryGrid');
+                if (p.ref_count !== undefined) {
+                    document.getElementById('refCounterDisplay').innerText = p.ref_count;
+                }
                 if(p.inventory && p.inventory.length > 0) {
-                    grid.innerHTML = '';
-                    p.inventory.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'inventory-item';
-                        div.innerHTML = `<span>${item}</span>`;
-                        grid.appendChild(div);
-                    });
+                    userInventory = p.inventory;
                 }
             } catch(e){}
+        } else {
+            document.getElementById('usernameBadge').innerText = "@demo_user";
+            document.getElementById('refLink').value = "https://t.me/GiftGrops_Bot?start=ref_demo123";
+            document.getElementById('refCounterDisplay').innerText = "12";
         }
 
         function updateTopBalances() {
             document.getElementById('starsBalanceDisplay').innerText = userBalances.stars;
-            document.getElementById('tonBalanceDisplay').innerText = userBalances.ton.toFixed(2);
+            renderInventory();
         }
 
-        // ПЕРЕКЛЮЧЕНИЕ ОСНОВНЫХ ВКЛАДОК
-        function switchTab(name) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-            document.getElementById(`tab-${name}`).classList.add('active');
-            document.getElementById(`btn-${name}`).classList.add('active');
+        function renderInventory() {
+            const grid = document.getElementById('inventoryGrid');
+            grid.innerHTML = '';
+            if(userInventory.length === 0) {
+                grid.innerHTML = '<div class="empty-label">Пока пусто 🫙</div>';
+                return;
+            }
+            userInventory.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'inventory-item';
+                const poolItem = upgradeItemsPool.find(p => p.name === item);
+                div.innerHTML = `<span>${poolItem ? poolItem.icon : '🎁'}</span><div style="font-size:10px; margin-top:4px;">${item}</div>`;
+                grid.appendChild(div);
+            });
         }
 
-        // ПЕРЕКЛЮЧЕНИЕ ПОДРАЗДЕЛОВ (КРАШ, МИНЫ, ДАЙС)
-        function switchSubGame(gameName) {
-            document.querySelectorAll('.subgame-container').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+        // ЛОГИКА АПГРЕЙДА
+        function openUpgradeSelector(type) {
+            const modal = document.getElementById('upgradeSelectModal');
+            const list = document.getElementById('upgradeSelectorList');
+            const title = document.getElementById('upgradeModalTitle');
+            list.innerHTML = '';
             
-            document.getElementById(`subgame-${gameName}`).classList.add('active');
-            document.getElementById(`subtab-btn-${gameName}`).classList.add('active');
+            if(type === 'mine') {
+                title.innerText = "Выберите ваш предмет";
+                if(userInventory.length === 0) {
+                    list.innerHTML = '<div style="color:#8e94a0; text-align:center; padding:10px;">Инвентарь пуст</div>';
+                } else {
+                    userInventory.forEach((itemName, index) => {
+                        const itemData = upgradeItemsPool.find(p => p.name === itemName);
+                        if(!itemData) return;
+                        const row = document.createElement('div');
+                        row.className = 'selector-row';
+                        row.innerHTML = `<span>${itemData.icon} ${itemData.name}</span><span style="color:#2563eb;">${itemData.cost}⭐</span>`;
+                        row.onclick = () => {
+                            selectedMineItem = itemData;
+                            document.getElementById('upBoxMineIcon').innerText = itemData.icon;
+                            document.getElementById('upBoxMineName').innerText = itemData.name;
+                            recalcUpgradeChance();
+                            closeModal('upgradeSelectModal');
+                        };
+                        list.appendChild(row);
+                    });
+                }
+            } else {
+                title.innerText = "Выберите желаемый предмет";
+                upgradeItemsPool.forEach(itemData => {
+                    const row = document.createElement('div');
+                    row.className = 'selector-row';
+                    row.innerHTML = `<span>${itemData.icon} ${itemData.name}</span><span style="color:#ea580c;">${itemData.cost}⭐</span>`;
+                    row.onclick = () => {
+                        selectedTargetItem = itemData;
+                        document.getElementById('upBoxTargetIcon').innerText = itemData.icon;
+                        document.getElementById('upBoxTargetName').innerText = itemData.name;
+                        recalcUpgradeChance();
+                        closeModal('upgradeSelectModal');
+                    };
+                    list.appendChild(row);
+                });
+            }
+            modal.style.display = 'flex';
+        }
+
+        function recalcUpgradeChance() {
+            if(!selectedMineItem || !selectedTargetItem) {
+                document.getElementById('upgradeChanceLabel').innerText = "Шанс выигрыша 0%";
+                document.getElementById('upgradeStatusText').innerText = "Выберите предмет";
+                return;
+            }
+            if(selectedMineItem.cost >= selectedTargetItem.cost) {
+                document.getElementById('upgradeChanceLabel').innerText = "Шанс выигрыша 100%";
+                document.getElementById('upgradeStatusText').innerText = "Готов к улучшению";
+                return;
+            }
+            let chance = Math.floor((selectedMineItem.cost / selectedTargetItem.cost) * 100);
+            if(chance < 1) chance = 1;
+            document.getElementById('upgradeChanceLabel').innerText = `Шанс выигрыша ${chance}%`;
+            document.getElementById('upgradeStatusText').innerText = `${chance}% шанс`;
+        }
+
+        function clearUpgradeSelections() {
+            selectedMineItem = null;
+            selectedTargetItem = null;
+            document.getElementById('upBoxMineIcon').innerText = '🔽';
+            document.getElementById('upBoxMineName').innerText = 'Не выбран';
+            document.getElementById('upBoxTargetIcon').innerText = '🔼';
+            document.getElementById('upBoxTargetName').innerText = 'Не выбран';
+            recalcUpgradeChance();
+        }
+
+        function processUpgrade() {
+            if(!selectedMineItem || !selectedTargetItem) {
+                Telegram.WebApp.showAlert('Пожалуйста, выберите оба предмета для апгрейда!');
+                return;
+            }
+            
+            let chance = 100;
+            if(selectedMineItem.cost < selectedTargetItem.cost) {
+                chance = (selectedMineItem.cost / selectedTargetItem.cost) * 100;
+            }
+
+            const rand = Math.random() * 100;
+            const isSuccess = rand <= chance;
+
+            const idx = userInventory.indexOf(selectedMineItem.name);
+            if(idx !== -1) {
+                userInventory.splice(idx, 1);
+            }
+
+            if(isSuccess) {
+                userInventory.push(selectedTargetItem.name);
+                document.getElementById('upgradeStatusText').innerText = "УСПЕХ! 🎉";
+                Telegram.WebApp.showAlert(`Поздравляем! Вы успешно получили ${selectedTargetItem.name}!`);
+            } else {
+                document.getElementById('upgradeStatusText').innerText = "НЕУДАЧА 💥";
+                Telegram.WebApp.showAlert('Предмет сгорел при улучшении. Повезет в следующий раз!');
+            }
+
+            clearUpgradeSelections();
+            updateTopBalances();
+        }
+
+        // ОБЩИЕ МОДАЛКИ И ТАБЫ
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            document.getElementById(`btn-${tabId}`).classList.add('active');
+        }
+
+        function switchSubGame(gameId) {
+            document.querySelectorAll('.subgame-container').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.mode-tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(`subgame-${gameId}`).classList.add('active');
+            event.target.classList.add('active');
         }
 
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        // ЛОГИКА ЖИВОЙ ЛЕНТЫ КЕЙСОВ
-        function initLiveDrops() {
+        function copyRefLink() {
+            const link = document.getElementById('refLink');
+            link.select();
+            document.execCommand('copy');
+            Telegram.WebApp.showAlert('Ссылка скопирована в буфер обмена!');
+        }
+
+        function shareToContacts() {
+            const link = document.getElementById('refLink').value;
+            const text = "Заходи в GiftGrops Premium App и получай крутые награды!";
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`);
+        }
+
+        // ЖИВАЯ ЛЕНТА И БОТЫ КРАША
+        function generateLiveDrops() {
             const stream = document.getElementById('liveDropsStream');
             stream.innerHTML = '';
             for(let i=0; i<6; i++) {
-                addRandomDropToStream(stream);
-            }
-        }
-        function addRandomDropToStream(element) {
-            const item = dropItems[Math.floor(Math.random() * dropItems.length)];
-            const user = botNames[Math.floor(Math.random() * botNames.length)];
-            const div = document.createElement('div');
-            div.className = 'live-drop-item';
-            div.innerHTML = `<span class="drop-item-name">${item}</span><span class="drop-user-name">${user}</span>`;
-            element.insertBefore(div, element.firstChild);
-            if(element.children.length > 7) element.removeChild(element.lastChild);
-        }
-        setInterval(() => addRandomDropToStream(document.getElementById('liveDropsStream')), 3500);
-
-        // ЛОГИКА ОБНОВЛЕНИЯ КНОПКИ СТАВКИ КРАША
-        function updateCrashButtonUI() {
-            const btn = document.getElementById('mainCrashBtn');
-            btn.className = "action-game-btn"; 
-
-            if (crashState.phase === 'waiting') {
-                if (crashState.myBet === 'placed') {
-                    btn.classList.add('btn-state-waiting');
-                    btn.innerText = "ОЖИДАНИЕ ВЗЛЕТА...";
-                    btn.disabled = true;
-                } else {
-                    btn.classList.add('btn-state-bet');
-                    btn.innerText = "СДЕЛАТЬ СТАВКУ";
-                    btn.disabled = false;
-                }
-            } else if (crashState.phase === 'flying') {
-                if (crashState.myBet === 'placed') {
-                    btn.classList.add('btn-state-cashout');
-                    let winSum = (crashState.betAmount * crashState.currentMultiplier).toFixed(2);
-                    btn.innerText = `ЗАБРАТЬ ${winSum} ${crashState.betCurrency.toUpperCase()}`;
-                    btn.disabled = false;
-                } else if (crashState.myBet === 'cashed_out') {
-                    btn.classList.add('btn-state-waiting');
-                    btn.innerText = "ВЫИГРЫШ ЗАФИКСИРОВАН";
-                    btn.disabled = true;
-                } else {
-                    btn.classList.add('btn-state-waiting');
-                    btn.innerText = "РАУНД ИДЕТ...";
-                    btn.disabled = true;
-                }
-            } else if (crashState.phase === 'crashed') {
-                btn.classList.add('btn-state-waiting');
-                btn.innerText = `КРАШ НА ${crashState.currentMultiplier.toFixed(2)}x`;
-                btn.disabled = true;
-            }
-        }
-
-        function handleCrashBtnClick() {
-            if (crashState.phase === 'waiting' && !crashState.myBet) {
-                let amt = parseFloat(document.getElementById('betAmountInput').value);
-                let cur = document.getElementById('betCurrencySelect').value;
-                
-                if (userBalances[cur] < amt || isNaN(amt) || amt <= 0) {
-                    Telegram.WebApp.showAlert('Недостаточно средств на балансе!');
-                    return;
-                }
-
-                crashState.myBet = 'placed';
-                crashState.betAmount = amt;
-                crashState.betCurrency = cur;
-                userBalances[cur] -= amt;
-                updateTopBalances();
-                updateCrashButtonUI();
-                
-                currentRoundPlayers.unshift({
-                    name: 'Вы',
-                    bet: amt,
-                    currency: cur,
-                    status: 'playing',
-                    cashout: null
-                });
-                renderOnlineBets();
-            } else if (crashState.phase === 'flying' && crashState.myBet === 'placed') {
-                crashState.myBet = 'cashed_out';
-                let reward = crashState.betAmount * crashState.currentMultiplier;
-                userBalances[crashState.betCurrency] += reward;
-                updateTopBalances();
-                updateCrashButtonUI();
-                
-                let me = currentRoundPlayers.find(p => p.name === 'Вы');
-                if(me) {
-                    me.status = 'won';
-                    me.cashout = crashState.currentMultiplier.toFixed(2);
-                }
-                renderOnlineBets();
+                const bName = botNames[Math.floor(Math.random()*botNames.length)];
+                const dItem = dropItems[Math.floor(Math.random()*dropItems.length)];
+                stream.innerHTML += `<div class="live-drop-item"><div class="drop-item-name">${dItem}</div><div class="drop-user-name">${bName}</div></div>`;
             }
         }
 
         function generateRoundPlayers() {
             currentRoundPlayers = [];
-            let count = Math.floor(Math.random() * 3) + 3;
-            let shuffled = botNames.sort(() => 0.5 - Math.random());
+            const count = 3 + Math.floor(Math.random() * 3);
             for(let i=0; i<count; i++) {
-                let isStars = Math.random() > 0.4;
                 currentRoundPlayers.push({
-                    name: shuffled[i],
-                    bet: isStars ? Math.floor(Math.random()*40 + 10) : parseFloat((Math.random()*1.5 + 0.1).toFixed(2)),
-                    currency: isStars ? 'stars' : 'ton',
-                    status: 'playing',
-                    cashout: null,
-                    autoExit: parseFloat((Math.random() * 2.5 + 1.05).toFixed(2))
+                    name: botNames[Math.floor(Math.random()*botNames.length)],
+                    bet: Math.floor(Math.random() * 40) + 5,
+                    cashout: (Math.random() * 3 + 1.1).toFixed(2),
+                    cashedOut: false
                 });
             }
         }
@@ -695,116 +953,170 @@
         function renderOnlineBets() {
             const list = document.getElementById('onlineBetsList');
             list.innerHTML = '';
-            currentRoundPlayers.forEach(p => {
-                const row = document.createElement('div');
-                row.className = `online-bet-row ${p.status === 'won' ? 'state-win' : (p.status === 'lost' ? 'state-lost' : '')}`;
-                
-                let textOut = '...';
-                if (p.status === 'won') textOut = `${p.cashout}x`;
-                if (p.status === 'lost') textOut = '💥 КРАШ';
+            
+            if(crashState.phase === 'waiting' && crashState.myBet) {
+                list.innerHTML += `<div class="online-bet-row"><div>Вы (Вы)</div><div>${crashState.betAmount} ${crashState.betCurrency.toUpperCase()}</div><div style="text-align:right;">Ожидание</div></div>`;
+            } else if(crashState.phase === 'running') {
+                if(crashState.myBet) {
+                    let text = crashState.myBet === 'cashed' ? `${(crashState.betAmount * crashState.currentMultiplier).toFixed(1)}` : 'В игре';
+                    let cName = crashState.myBet === 'cashed' ? 'state-win' : '';
+                    list.innerHTML += `<div class="online-bet-row ${cName}"><div>Вы (Вы)</div><div>${crashState.betAmount}</div><div style="text-align:right;">${text}</div></div>`;
+                }
+            }
 
-                row.innerHTML = `
-                    <div>${p.name}</div>
-                    <div>${p.bet} ${p.currency === 'stars' ? '⭐️' : '💎'}</div>
-                    <div style="text-align: right; font-weight: 600;">${textOut}</div>
-                `;
-                list.appendChild(row);
+            currentRoundPlayers.forEach(p => {
+                let status = 'В игре';
+                let stateClass = '';
+                if(crashState.phase === 'running' && parseFloat(crashState.currentMultiplier) >= parseFloat(p.cashout)) {
+                    p.cashedOut = true;
+                }
+                if(p.cashedOut || crashState.phase === 'crashed') {
+                    status = `${p.cashout}x`;
+                    stateClass = 'state-win';
+                }
+                if(crashState.phase === 'crashed' && !p.cashedOut) {
+                    status = 'Краш';
+                    stateClass = 'state-lost';
+                }
+                list.innerHTML += `<div class="online-bet-row ${stateClass}"><div>${p.name}</div><div>${p.bet} STARS</div><div style="text-align:right;">${status}</div></div>`;
             });
         }
 
-        function drawGraph(progress) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.015)';
-            ctx.lineWidth = 1;
-            for (let i = 0; i < canvas.width; i += 40) {
-                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
-            }
-            for (let j = 0; j < canvas.height; j += 40) {
-                ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(canvas.width, j); ctx.stroke();
-            }
+        // СЕРДЦЕ КРАША: ИГРОВОЙ ЦИКЛ НА CANVAS
+        function handleCrashBtnClick() {
+            const btn = document.getElementById('mainCrashBtn');
+            const amtInput = document.getElementById('betAmountInput');
+            const currency = document.getElementById('betCurrencySelect').value;
+            const amt = parseInt(amtInput.value);
 
-            if (crashState.phase === 'flying') {
-                ctx.strokeStyle = '#2563eb';
-                ctx.lineWidth = 3;
-                ctx.lineCap = 'round';
-                ctx.beginPath();
-                ctx.moveTo(0, canvas.height);
-                
-                let targetX = canvas.width * Math.min(progress / 8, 0.88);
-                let targetY = canvas.height - (canvas.height * Math.min(progress / 8, 0.78));
-                
-                ctx.quadraticCurveTo(targetX / 1.8, canvas.height, targetX, targetY);
-                ctx.stroke();
+            if(crashState.phase === 'waiting') {
+                if(isNaN(amt) || amt < 1) {
+                    Telegram.WebApp.showAlert('Введите корректную ставку!');
+                    return;
+                }
+                if(userBalances[currency] < amt) {
+                    Telegram.WebApp.showAlert('Недостаточно баланса!');
+                    return;
+                }
 
-                ctx.fillStyle = '#ffffff';
-                ctx.beginPath();
-                ctx.arc(targetX, targetY, 5, 0, 2 * Math.PI);
-                ctx.fill();
+                userBalances[currency] -= amt;
+                crashState.myBet = 'active';
+                crashState.betAmount = amt;
+                crashState.betCurrency = currency;
+                updateTopBalances();
+
+                btn.innerText = 'СТАВКА ПРИНЯТА';
+                btn.className = 'action-game-btn btn-state-waiting';
+                renderOnlineBets();
+            } 
+            else if(crashState.phase === 'running' && crashState.myBet === 'active') {
+                crashState.myBet = 'cashed';
+                const winAmt = Math.floor(crashState.betAmount * crashState.currentMultiplier);
+                userBalances[crashState.betCurrency] += winAmt;
+                updateTopBalances();
+                
+                btn.innerText = `ЗАБРАНО (+${winAmt})`;
+                btn.className = 'action-game-btn btn-state-waiting';
+                Telegram.WebApp.showAlert(`Вы успешно вывели ${winAmt} ${crashState.betCurrency.toUpperCase()} на коэффициенте ${crashState.currentMultiplier.toFixed(2)}x!`);
             }
         }
 
-        function mainLoop() {
-            if (crashState.phase === 'waiting') {
-                crashState.timer -= 0.05;
-                document.getElementById('crashStatusLabel').innerText = `Взлет через ${Math.max(0, crashState.timer).toFixed(1)}с`;
-                document.getElementById('crashMultiplier').innerText = "1.00x";
-                document.getElementById('crashMultiplier').style.color = "#ffffff";
-                
-                if (crashState.timer <= 0) {
-                    crashState.phase = 'flying';
+        let lastTime = performance.now();
+        function loop(now) {
+            const dt = (now - lastTime) / 1000;
+            lastTime = now;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Отрисовка красивой неоновой сетки на фоне
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+            ctx.lineWidth = 1;
+            for(let x = 0; x < canvas.width; x += 30) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+            }
+            for(let y = 0; y < canvas.height; y += 30) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+            }
+
+            const btn = document.getElementById('mainCrashBtn');
+
+            if(crashState.phase === 'waiting') {
+                crashState.timer -= dt;
+                if(crashState.timer <= 0) {
+                    crashState.phase = 'running';
                     crashState.currentMultiplier = 1.00;
-                    crashState.crashPoint = parseFloat((Math.random() * 3.8 + 1.01).toFixed(2));
-                    document.getElementById('crashStatusLabel').innerText = "Ракетка летит";
-                }
-            } else if (crashState.phase === 'flying') {
-                crashState.currentMultiplier += 0.012 * (crashState.currentMultiplier * 0.32);
-                document.getElementById('crashMultiplier').innerText = `${crashState.currentMultiplier.toFixed(2)}x`;
-
-                currentRoundPlayers.forEach(p => {
-                    if (p.status === 'playing' && p.name !== 'Вы' && crashState.currentMultiplier >= p.autoExit) {
-                        p.status = 'won';
-                        p.cashout = p.autoExit;
-                        renderOnlineBets();
+                    crashState.crashPoint = (1.05 + Math.random() * 3.5); // Генерация точки краша
+                    generateRoundPlayers();
+                    if(crashState.myBet === 'active') {
+                        btn.innerText = 'ЗАБРАТЬ СТАВКУ';
+                        btn.className = 'action-game-btn btn-state-cashout';
+                    } else {
+                        btn.innerText = 'ИГРА ИДЕТ';
+                        btn.className = 'action-game-btn btn-state-waiting';
                     }
-                });
-
-                drawGraph(crashState.currentMultiplier);
-
-                if (crashState.currentMultiplier >= crashState.crashPoint) {
-                    crashState.phase = 'crashed';
-                    crashState.timer = 2.5; 
-                    document.getElementById('crashStatusLabel').innerText = "РАУНД ЗАВЕРШЕН";
-                    document.getElementById('crashMultiplier').innerText = `💥 ${crashState.crashPoint.toFixed(2)}x`;
-                    document.getElementById('crashMultiplier').style.color = "#ef4444";
-
-                    currentRoundPlayers.forEach(p => {
-                        if (p.status === 'playing') p.status = 'lost';
-                    });
-                    if (crashState.myBet === 'placed') crashState.myBet = null;
-                    renderOnlineBets();
                 }
-            } else if (crashState.phase === 'crashed') {
-                crashState.timer -= 0.05;
-                if (crashState.timer <= 0) {
+                document.getElementById('crashMultiplier').innerText = `🚀 ${Math.max(0, crashState.timer).toFixed(1)}с`;
+                document.getElementById('crashStatusLabel').innerText = 'До начала раунда';
+                renderOnlineBets();
+            } 
+            else if(crashState.phase === 'running') {
+                // Плавное ускорение роста графика
+                crashState.currentMultiplier += dt * (0.12 + (crashState.currentMultiplier * 0.08));
+                
+                if(crashState.currentMultiplier >= crashState.crashPoint) {
+                    crashState.phase = 'crashed';
+                    crashState.timer = 3.0; // Время задержки экрана краша
+                    btn.innerText = 'ВЗОРВАЛОСЬ! (КРАШ)';
+                    btn.className = 'action-game-btn btn-state-waiting';
+                } else {
+                    document.getElementById('crashMultiplier').innerText = `${crashState.currentMultiplier.toFixed(2)}x`;
+                    document.getElementById('crashStatusLabel').innerText = 'График летит...';
+                }
+
+                // Рисование неонового графика Краша
+                ctx.beginPath();
+                ctx.strokeStyle = '#2563eb';
+                ctx.lineWidth = 4;
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = '#2563eb';
+                
+                let progress = (crashState.currentMultiplier - 1) / 4;
+                let endX = progress * canvas.width * 0.8;
+                let endY = canvas.height - (progress * canvas.height * 0.7);
+                
+                ctx.moveTo(0, canvas.height);
+                ctx.quadraticCurveTo(canvas.width * 0.3, canvas.height * 0.9, endX, endY);
+                ctx.stroke();
+                ctx.shadowBlur = 0; // Сброс теней
+                
+                renderOnlineBets();
+            } 
+            else if(crashState.phase === 'crashed') {
+                crashState.timer -= dt;
+                ctx.beginPath();
+                ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                document.getElementById('crashMultiplier').innerHTML = `<span style="color:#ef4444;">${crashState.currentMultiplier.toFixed(2)}x</span>`;
+                document.getElementById('crashStatusLabel').innerText = 'Взрыв графика!';
+
+                if(crashState.timer <= 0) {
                     crashState.phase = 'waiting';
                     crashState.timer = 5.0;
                     crashState.myBet = null;
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    generateRoundPlayers();
-                    renderOnlineBets();
+                    btn.innerText = 'ПОСТАВИТЬ СТАВКУ';
+                    btn.className = 'action-game-btn btn-state-bet';
                 }
             }
 
-            updateCrashButtonUI();
+            requestAnimationFrame(loop);
         }
 
-        // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАПУСКЕ
-        initLiveDrops();
-        generateRoundPlayers();
-        renderOnlineBets();
+        // СТАРТ ИНИЦИАЛИЗАЦИИ
         updateTopBalances();
-        setInterval(mainLoop, 50);
+        generateLiveDrops();
+        setInterval(generateLiveDrops, 8000);
+        requestAnimationFrame(loop);
     </script>
 </body>
 </html>
